@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  BUYER
+  SELLER
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+
+  role      Role     @default(BUYER)
+
+  books     Book[]
+  cart      Cart?
+  orders    Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Book {
+  id          String   @id @default(uuid())
+  title       String
+  author      String
+  description String
+  price       Float
+  imageUrl    String
+
+  sellerId    String
+  seller      User     @relation(fields: [sellerId], references: [id])
+
+  cartItems   CartItem[]
+  orderItems  OrderItem[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Cart {
+  id        String     @id @default(uuid())
+
+  userId    String     @unique
+  user      User       @relation(fields: [userId], references: [id])
+
+  items     CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+
+  cartId    String
+  cart      Cart     @relation(fields: [cartId], references: [id])
+
+  bookId    String
+  book      Book     @relation(fields: [bookId], references: [id])
+
+  quantity  Int      @default(1)
+}
+
+model Order {
+  id          String      @id @default(uuid())
+
+  userId      String
+  user        User        @relation(fields: [userId], references: [id])
+
+  totalAmount Float
+
+  items       OrderItem[]
+
+  createdAt   DateTime    @default(now())
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+
+  bookId    String
+  book      Book     @relation(fields: [bookId], references: [id])
+
+  quantity  Int
+  price     Float
+}
