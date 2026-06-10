@@ -7,8 +7,8 @@ import {
   getSellerBooks,
   deleteBook,
   
-} from '../controllers/book.controller'
-import { protect } from '../middleware/auth.middleware'
+} from '../controllers/book.controller.js'
+import { protect } from '../middleware/auth.middleware.js'
 
 const bookRouter = new Hono()
 

@@ -3,8 +3,8 @@ import {
   createOrder,
   getOrders,
   getSellerOrders
-} from '../controllers/order.controller'
-import { protect } from '../middleware/auth.middleware'
+} from '../controllers/order.controller.js'
+import { protect } from '../middleware/auth.middleware.js'
 
 const orderRouter = new Hono()
 

@@ -1,4 +1,4 @@
-import { prisma } from '../lib/prisma'
+import { prisma } from '../lib/prisma.js'
 import type { Context } from 'hono'
 
 export const addToCart = async (c: Context) => {

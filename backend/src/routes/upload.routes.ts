@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
 import { PutObjectCommand } from '@aws-sdk/client-s3'
-import { s3 } from '../lib/s3'
+import { s3 } from '../lib/s3.js'
 
 const uploadRouter = new Hono()
 

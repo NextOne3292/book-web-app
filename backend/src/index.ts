@@ -3,11 +3,11 @@ import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
 
-import authRouter from './routes/auth.routes'
-import bookRouter from './routes/book.routes'
-import cartRouter from './routes/cart.routes'
-import orderRouter from './routes/order.routes'
-import uploadRouter from './routes/upload.routes'
+import authRouter from './routes/auth.routes.js'
+import bookRouter from './routes/book.routes.js'
+import cartRouter from './routes/cart.routes.js'
+import orderRouter from './routes/order.routes.js'
+import uploadRouter from './routes/upload.routes.js'
 
 const app = new Hono()
 
