@@ -13,20 +13,20 @@ const app = new Hono()
 
 app.use(
   '*',
-  cors({
-    origin: 'http://localhost:5173',
-    allowMethods: [
-      'GET',
-      'POST',
-      'PUT',
-      'DELETE',
-      'PATCH',
-    ],
-    allowHeaders: [
-      'Content-Type',
-      'Authorization',
-    ],
-  }),
+ cors({
+  origin: '*',
+  allowMethods: [
+    'GET',
+    'POST',
+    'PUT',
+    'DELETE',
+    'PATCH',
+  ],
+  allowHeaders: [
+    'Content-Type',
+    'Authorization',
+  ],
+}),
 )
 
 app.get('/', (c) => {
@@ -42,7 +42,7 @@ app.route('/upload', uploadRouter)
 serve(
   {
     fetch: app.fetch,
-    port: 3000,
+    port: Number(process.env.PORT) || 3000,
   },
   (info) => {
     console.log(
